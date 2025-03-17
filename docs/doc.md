@@ -10,7 +10,6 @@ Este projeto realiza a análise de dados do mercado imobiliário utilizando:
 - **Análise Exploratória de Dados (EDA)**
 - **Armazenamento em MySQL**
 - **Visualização de dados no Power BI**
-- **Mapas geoespaciais** com GeoPandas e Folium
 
 Os dados são obtidos de conjuntos públicos armazenados localmente e processados para insights do setor imobiliário.
 
@@ -132,26 +131,6 @@ CREATE TABLE IF NOT EXISTS imoveis (
     - Impacto de fatores no valor do imóvel.
     - Distribuição de preços por região.
 - **Fonte de dados:** MySQL conectado ao Power BI.
-
-### 6.2 Mapas Geoespaciais com GeoPandas e Folium
-
-```python
-import geopandas as gpd
-import folium
-
-# Carregar dados geoespaciais
-gdf = gpd.read_file("data/municipios.geojson")
-
-# Criar mapa interativo
-mapa = folium.Map(location=[-15.7801, -47.9292], zoom_start=5)
-for _, row in gdf.iterrows():
-    folium.Marker(
-        location=[row["latitude"], row["longitude"]],
-        popup=f"{row['municipio']}: R${row['preco_medio']:.2f}"
-    ).add_to(mapa)
-
-mapa.save("mapa_interativo.html")
-```
 
 ---
 
